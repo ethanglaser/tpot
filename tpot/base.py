@@ -533,7 +533,7 @@ class TPOTBase(BaseEstimator):
                 exec("from {} import {}".format(key[4:], module_list))
                 print("from {} import {}".format(key[4:], module_list))
             else:
-                if config_dict == "TPOT sklearnex" and "sklearn" in key:
+                if self.config_dict == "TPOT sklearnex" and "sklearn" in key:
                     tempkey = key.replace("sklearn", "sklearnex")
                     try:
                         exec("from {} import {}".format(tempkey, module_list))
