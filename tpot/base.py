@@ -537,13 +537,13 @@ class TPOTBase(BaseEstimator):
                     tempkey = key.replace("sklearn", "sklearnex")
                     try:
                         exec("from {} import {}".format(tempkey, module_list))
-                        print("from {} import {}".format(tempkey, module_list))
+                        print("from {} import {} try".format(tempkey, module_list))
                     except:
-                        exec("from {} import {} except".format(key, module_list))
+                        exec("from {} import {}".format(key, module_list))
                         print("from {} import {} except".format(key, module_list))
                 else:
                     exec("from {} import {}".format(key, module_list))
-                    print("from {} import {}".format(key, module_list))
+                    print("from {} import {} else".format(key, module_list))
 
             for var in operator.import_hash[key]:
                 self.operators_context[var] = eval(var)
