@@ -395,13 +395,6 @@ class TPOTBase(BaseEstimator):
                 else:
                     self._config_dict = regressor_config_cuml
             elif config_dict == "TPOT sklearnex":
-                # if not _has_cuml():
-                #     raise ValueError(
-                #         "The GPU machine learning library cuML is not "
-                #         "available. To use cuML, please install cuML via conda."
-                #     )
-                from sklearnex import patch_sklearn
-                patch_sklearn()
                 self._config_dict = self.default_config_dict
             else:
                 config = self._read_config_file(config_dict)
