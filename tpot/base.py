@@ -128,6 +128,7 @@ class TPOTBase(BaseEstimator):
         verbosity=0,
         disable_update_check=False,
         log_file=None,
+        use_sklearnex=False,
     ):
         """Set up the genetic programming algorithm for pipeline optimization.
 
@@ -394,8 +395,6 @@ class TPOTBase(BaseEstimator):
                     self._config_dict = classifier_config_cuml
                 else:
                     self._config_dict = regressor_config_cuml
-            elif config_dict == "TPOT sklearnex":
-                self._config_dict = self.default_config_dict
             else:
                 config = self._read_config_file(config_dict)
                 if hasattr(config, "tpot_config"):
@@ -524,19 +523,15 @@ class TPOTBase(BaseEstimator):
 
             if key.startswith("tpot."):
                 exec("from {} import {}".format(key[4:], module_list))
-                # print("from {} import {}".format(key[4:], module_list))
             else:
-                if self.config_dict == "TPOT sklearnex" and "sklearn" in key:
+                if self.use_sklearnex and "sklearn" in key:
                     tempkey = key.replace("sklearn", "sklearnex")
                     try:
                         exec("from {} import {}".format(tempkey, module_list))
-                        # print("from {} import {} try".format(tempkey, module_list))
                     except:
                         exec("from {} import {}".format(key, module_list))
-                        # print("from {} import {} except".format(key, module_list))
                 else:
                     exec("from {} import {}".format(key, module_list))
-                    # print("from {} import {} else".format(key, module_list))
 
             for var in operator.import_hash[key]:
                 self.operators_context[var] = eval(var)
