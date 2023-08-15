@@ -525,9 +525,9 @@ class TPOTBase(BaseEstimator):
                 exec("from {} import {}".format(key[4:], module_list))
             else:
                 if self.use_sklearnex and "sklearn" in key:
-                    tempkey = key.replace("sklearn", "sklearnex")
+                    sklearnex_key = key.replace("sklearn", "sklearnex")
                     try:
-                        exec("from {} import {}".format(tempkey, module_list))
+                        exec("from {} import {}".format(sklearnex_key, module_list))
                     except:
                         exec("from {} import {}".format(key, module_list))
                 else:
