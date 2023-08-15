@@ -311,6 +311,7 @@ class TPOTBase(BaseEstimator):
         self.disable_update_check = disable_update_check
         self.random_state = random_state
         self.log_file = log_file
+        self.use_sklearnex = use_sklearnex
 
     def _setup_template(self, template):
         self.template = template
